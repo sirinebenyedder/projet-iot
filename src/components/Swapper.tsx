@@ -15,42 +15,69 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useEffect } from "react";
+import useWeatherStore from "../store/weather.store";
 
 export function Swapper() {
-  // Example static data for the cards
+  const {temperature , humidite , getData}= useWeatherStore()
+  //getData every 5s
+
+  // useEffect(()=>{
+  //   const fetchdata = async()=>{
+  //     await getData()
+  //   }
+  //   fetchdata()
+  // },[])
+  
+  useEffect(() => {
+    
+    const interval=setInterval(async () => {
+      await getData();
+      console.log("interval")
+    },5000)
+    return () => clearInterval(interval);
+
+  },[])
+
+  
+  
+
+  
+
+
   const cards = [
     {
       title: "Temperature IN",
       icon: <Icons.temperature />,
-      value: 22,
+      value: temperature,
       unit: "°F",
       texts: ["", "Indoor Temperature", ""],
     },
     {
       title: "Humidity IN",
       icon: <Icons.droplet />,
-      value: 45,
+      value: humidite,
       unit: "%",
       texts: ["", "Indoor Humidity", ""],
     },
     {
       title: "Temperature OUT",
       icon: <Icons.temperature />,
-      value: 18,
+      value: temperature,
       unit: "°F",
       texts: ["", "Outdoor Temperature", ""],
     },
     {
       title: "Humidity OUT",
       icon: <Icons.droplet />,
-      value: 50,
+      value: humidite,
       unit: "%",
       texts: ["", "Outdoor Humidity", ""],
     },
   ];
 
   return (
-    <div className="flex m-4 gap-3 min-h-60">
+    <div className="flex m-4 gap-3 min-h-80">
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={10}
@@ -70,7 +97,7 @@ export function Swapper() {
         }}
       >
         {cards.map((card, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="p-3 ">
             <Card
               title={card.title}
               icon={card.icon}

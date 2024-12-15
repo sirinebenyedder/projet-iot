@@ -1,4 +1,12 @@
+import { BigSun, BigSunCloud, CloudSun, IceIcon } from "@/weather_icons/Icons";
+
 export function Welcome() {
-    return (<div className="flex m-4 gap-3 min-h-60">
-    HII</div>)
+    return (
+            <div className="flex m-4 gap-3 w-[500px]  justify-center items-center ">
+                <IceIcon/>
+                <CloudSun/>
+                <BigSunCloud/>
+                <BigSun/>
+            </div>
+    )
 };

@@ -4,7 +4,7 @@ import { Weather } from "./models";
 
 export const addTemperature = async (data) => {
     try {
-        connectToDB();
+        await connectToDB();
         const weather = new Weather({
             temperature: data.temperature,
             humidite: data.humidite,
