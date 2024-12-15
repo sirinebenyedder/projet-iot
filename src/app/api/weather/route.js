@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server.js';
 import clientPromise from '../../../connectionTs/mongodb.ts'; // Adjust the path as necessary
 
-export async function POST(req, res) {
+export async function POST() {
         try {
             const client = await clientPromise;
             console.log("aaa")
